@@ -17,6 +17,7 @@ export default class Main extends React.Component {
 
   componentDidMount(){
     console.log('working');
+    console.log(AsyncStorage.getItem('noteArray'));
     AsyncStorage.getItem('noteArray').then((value) => {
       this.setState({'noteArray': JSON.parse(value)});
       return <Text style={styles.test}>{value}</Text>
@@ -41,6 +42,7 @@ export default class Main extends React.Component {
   deleteNote(key) {
     this.state.noteArray.splice(key, 1);
     this.setState({noteArray: this.state.noteArray});
+    AsyncStorage.setItem('noteArray', JSON.stringify(this.state.noteArray));
   }
 
   render() {
